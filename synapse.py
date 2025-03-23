@@ -21,7 +21,6 @@ from typing import Any, Callable, Dict, Generic, List, Optional, Set, Tuple, Typ
 import openai
 from openai import AsyncOpenAI
 
-aclient = AsyncOpenAI(api_key=self.api_key)
 from dotenv import load_dotenv
 
 # =============================================================================
@@ -394,12 +393,11 @@ class LLMClient:
         self.max_tokens = 4000
         self.timeout = 90
         self.cache = {}
-
+        
         # Initialize API client
+        self.aclient = AsyncOpenAI(api_key=self.api_key)
         if self.base_url != "https://api.openai.com/v1":
-            # TODO: The 'openai.api_base' option isn't read in the client API. You will need to pass it when you instantiate the client, e.g. 'OpenAI(base_url=self.base_url)'
-            pass  # Adding a pass statement to prevent indentation error
-            # openai.api_base = self.base_url
+            self.aclient = AsyncOpenAI(api_key=self.api_key, base_url=self.base_url)
 
     async def aask(self,
                    prompt: str,
@@ -423,7 +421,7 @@ class LLMClient:
         messages.append({"role": "user", "content": prompt})
 
         try:
-            response = await aclient.chat.completions.create(model=self.model,
+            response = await self.aclient.chat.completions.create(model=self.model,
             messages=messages,
             temperature=temperature,
             max_tokens=max_tokens,
