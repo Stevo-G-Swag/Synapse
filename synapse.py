@@ -398,6 +398,7 @@ class LLMClient:
         # Initialize API client
         if self.base_url != "https://api.openai.com/v1":
             # TODO: The 'openai.api_base' option isn't read in the client API. You will need to pass it when you instantiate the client, e.g. 'OpenAI(base_url=self.base_url)'
+            pass  # Adding a pass statement to prevent indentation error
             # openai.api_base = self.base_url
 
     async def aask(self,

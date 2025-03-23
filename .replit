@@ -23,6 +23,7 @@ regex = "Traceback.*"
 message = "Did your Python code raise an exception?"
 
 [workflows]
+runButton = "Run"
 
 [[workflows.workflow]]
 name = "run"
@@ -36,3 +37,12 @@ args = "python3"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "Python 'create web app tictactoe'"
+
+[[workflows.workflow]]
+name = "Run"
+author = 34492043
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python3 synapse.py \"create a web-based task management application with user authorization\""
