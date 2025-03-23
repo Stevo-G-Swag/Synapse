@@ -1,4 +1,4 @@
-entrypoint = "main.py"
+entrypoint = "synapse.py"
 modules = ["python-3.11"]
 
 [nix]
@@ -11,5 +11,16 @@ language = "python3"
 requiredFiles = [".replit", "replit.nix"]
 
 [deployment]
-run = ["python3", "main.py"]
+run = ["python3", "synapse.py"]
 deploymentTarget = "cloudrun"
+
+[workflows]
+
+[[workflows.workflow]]
+name = "run"
+mode = "sequential"
+author = 34492043
+
+[[workflows.workflow.tasks]]
+args = "python3 /""create a web-based task management application with user authorization""/
+task = "shell.exec"
