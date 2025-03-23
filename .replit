@@ -1,3 +1,4 @@
+
 entrypoint = "synapse.py"
 modules = ["python-3.11"]
 
@@ -14,13 +15,13 @@ requiredFiles = [".replit", "replit.nix"]
 run = ["python3", "synapse.py"]
 deploymentTarget = "cloudrun"
 
-[workflows]
+[env]
+PYTHON_VERSION = "3.11"
 
-[[workflows.workflow]]
-name = "run"
-mode = "sequential"
-author = 34492043
+[[hints]]
+regex = "Traceback.*"
+message = "Did your Python code raise an exception?"
 
-[[workflows.workflow.tasks]]
-args = "python3 /""create a web-based task management application with user authorization""/
-task = "shell.exec"
+[[workflows.run]]
+commands = ["python3", "synapse.py"]
+persistent = true
