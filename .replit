@@ -22,6 +22,17 @@ PYTHON_VERSION = "3.11"
 regex = "Traceback.*"
 message = "Did your Python code raise an exception?"
 
-[[workflows.run]]
-commands = ["python3", "synapse.py"]
-persistent = true
+[workflows]
+
+[[workflows.workflow]]
+name = "run"
+mode = "sequential"
+author = 34492043
+
+[[workflows.workflow.tasks]]
+task = "packager.installForLanguage"
+args = "python3"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "Python 'create web app tictactoe'"

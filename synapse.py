@@ -19,6 +19,9 @@ from pathlib import Path
 from typing import Any, Callable, Dict, Generic, List, Optional, Set, Tuple, Type, TypeVar, Union, cast
 
 import openai
+from openai import AsyncOpenAI
+
+aclient = AsyncOpenAI(api_key=self.api_key)
 from dotenv import load_dotenv
 
 # =============================================================================
@@ -393,9 +396,9 @@ class LLMClient:
         self.cache = {}
 
         # Initialize API client
-        openai.api_key = self.api_key
         if self.base_url != "https://api.openai.com/v1":
-            openai.api_base = self.base_url
+            # TODO: The 'openai.api_base' option isn't read in the client API. You will need to pass it when you instantiate the client, e.g. 'OpenAI(base_url=self.base_url)'
+            # openai.api_base = self.base_url
 
     async def aask(self,
                    prompt: str,
@@ -419,12 +422,11 @@ class LLMClient:
         messages.append({"role": "user", "content": prompt})
 
         try:
-            response = await openai.ChatCompletion.acreate(
-                model=self.model,
-                messages=messages,
-                temperature=temperature,
-                max_tokens=max_tokens,
-                timeout=self.timeout)
+            response = await aclient.chat.completions.create(model=self.model,
+            messages=messages,
+            temperature=temperature,
+            max_tokens=max_tokens,
+            timeout=self.timeout)
 
             content = response.choices[0].message.content.strip()
 
