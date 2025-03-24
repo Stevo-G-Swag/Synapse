@@ -94,3 +94,4 @@ This project is available under the MIT License.
 
 - OpenAI for providing the LLM capabilities
 - The Python community for the excellent libraries and tools
+- MetaGPT https://github.com/geekan/MetaGPT
