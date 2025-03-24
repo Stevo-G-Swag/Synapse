@@ -1,7 +1,0 @@
-# Requirements
-
-requests
-flask
-pytest
-sqlalchemy
-pydantic

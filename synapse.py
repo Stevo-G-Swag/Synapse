@@ -18,7 +18,6 @@ from enum import Enum
 from pathlib import Path
 from typing import Any, Callable, Dict, Generic, List, Optional, Set, Tuple, Type, TypeVar, Union, cast
 
-import openai
 from openai import AsyncOpenAI
 
 from dotenv import load_dotenv
